@@ -34,7 +34,7 @@ def usb_waiter():
         new_devices.append(device[0:8])
 
     new = str(set(new_devices) - set(start_devices)).strip("'}{ ")
-
+    print(str('NEW USB ID IS: ' + new))
     return new
 
 
