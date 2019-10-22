@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 
 import octoprint.plugin
-from octoprint_usbon import client
+from . import client
 
 
 class USBoN(octoprint.plugin.StartupPlugin,
