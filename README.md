@@ -31,7 +31,7 @@ sudo systemctl enable client.service
 sudo reboot
 ```
 
-*server setup*  
+*server setup:*  
 ```bash
 # install depends:
 sudo apt-get install linux-tools-generic
