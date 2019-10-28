@@ -1,11 +1,12 @@
 
 # motion setup:
-apt-get install ffmpeg libmariadb3 libpq5 libmicrohttpd12
+apt-get install ffmpeg libmariadb3 libpq5 libmicrohttpd12 -y
 wget https://github.com/Motion-Project/motion/releases/download/release-4.2.2/pi_buster_motion_4.2.2-1_armhf.deb
 dpkg -i pi_buster_motion_4.2.2-1_armhf.deb
-apt-get install python-pip python-dev libssl-dev libcurl4-openssl-dev libjpeg-dev libz-dev
-apt-get install python-pip3
-apt-get install python-pillow
+apt-get install python-pip3 -y
+apt-get install python-pillow -y
+apt-get install python-pip python-dev libssl-dev libcurl4-openssl-dev libjpeg-dev libz-dev -y
+
 
 # motioneye setup:
 pip install motioneye

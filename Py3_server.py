@@ -14,7 +14,7 @@ import subprocess
 
 verbose = False  # use prints to console?
 
-addr = '127.0.0.1/'  # server's address
+addr = '127.0.0.1'  # server's address
 port = 8080  # must match client
 
 
@@ -29,6 +29,8 @@ class RequestHandler(BaseHTTPRequestHandler):
         content_length = request_headers.get('Content-Length')
         length = int(content_length) if content_length else 0
         remote = json.loads(self.rfile.read(length))
+
+        print(remote['ip'])
 
         # mount satellite USB:
         satellite = str('usbip attach -r ' + remote['ip'] + ' -b 1-1')

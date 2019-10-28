@@ -13,7 +13,7 @@ from subprocess import Popen
 
 verbose = False  # use prints to console?  motioneye remotes are likely headless / self sufficient
 
-addr = '127.0.0.1/'  # OctoPrint Server / static address to send ip to
+addr = '127.0.0.1'  # OctoPrint Server / static address to send ip to
 port = 8080  # must match server
 
 hostname = socket.gethostname()

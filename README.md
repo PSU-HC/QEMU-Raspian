@@ -14,14 +14,13 @@ As of 10/28/19, scripts / functions have yet to be merged into the OctoPrint plu
 *remote setup:*
 ```bash
 # install depends:
-pip3 install requests
-sudo apt-get install linux-tools-generic
-sudo modprobe usbip_host
+pip3 install Requests
+sudo apt-get install usbip
 # nohup usbipd &  # starts daemon, this is run from the python script 
 
 # move files to destinations:
 cp Py3_client.py ~
-cp client.service ~/lib/systemd/system/
+sudo cp client.service /etc/systemd/client.service
 
 # start systemd service:
 sudo systemctl daemon-reload
