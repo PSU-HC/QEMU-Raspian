@@ -1,15 +1,8 @@
 # USBoN
 
-Serial over Network Plugin for Octoprint    
+*Serial over Network Plugin for Octoprint*
 
-Intended for remote Pi Zeros (raspian + motioneye) installed around our facility.     
-A central server manages motioneye streams, OctoPrint, job slicing, etc.    
-
-Serial device (e.g. 3d printer) connected to a remote client is mounted on the server using the Debian usbip package.       
-
-As of 10/28/19, scripts / functions have yet to be merged into the OctoPrint plugin scaffold. 
-
-# Setup:
+***Please see /qemu_env for ARM Raspian emulation!***
 
 *remote setup:*
 ```bash
@@ -38,3 +31,11 @@ sudo modprobe vhci-hcd
 python3 Py3_server.py
 ```
 
+***Status***        
+
+Intended for remote Pi Zeros (raspian + motioneye) installed around our facility.     
+A central server manages motioneye streams, OctoPrint, job slicing, etc.    
+
+Serial device (e.g. 3d printer) connected to a remote client is mounted on the server using the Debian usbip package.       
+
+As of 10/28/19, scripts / functions have yet to be merged into the OctoPrint plugin scaffold. 
