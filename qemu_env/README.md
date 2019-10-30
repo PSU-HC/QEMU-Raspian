@@ -14,7 +14,7 @@ brew install qemu wget
 
 Get the Python3 CLI in this repo:
 ```bash
-wget <raw-TBD>
+wget https://raw.githubusercontent.com/Jesssullivan/USBoN/master/qemu_env/QEMU_Raspian.py
 ```     
 
 Each Pi emulation gets a directory: 

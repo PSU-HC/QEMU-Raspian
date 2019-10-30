@@ -2,7 +2,7 @@
 
 *Serial over Network Plugin for Octoprint*
 
-***Please see /qemu_env for ARM Raspian emulation!***
+***Please see [/qemu_env](https://github.com/Jesssullivan/USBoN/tree/master/qemu_env) for ARM Raspian emulation!***
 
 *remote setup:*
 ```bash
