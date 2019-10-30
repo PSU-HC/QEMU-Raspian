@@ -51,3 +51,4 @@ sudo python3 QEMU_Raspian.py stretch  # with GUI
 sudo python3 QEMU_Raspian.py buster  # newer release + newer kernel  
 ```
   
+![Alt text](imgs.png?raw=true)
