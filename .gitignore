@@ -5,6 +5,7 @@ p3
 
 # common:
 .DS_Store
+.idea
 OctoPrint
 *.img
 *.zip
