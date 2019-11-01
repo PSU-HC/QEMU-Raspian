@@ -61,13 +61,19 @@ stretchlite = dict(
 
 
 def main(type):
+
     command = ' '
 
     if not os.path.exists(type['qcow']):
+
         if not os.path.exists(type['fs']):
+
             if not os.path.exists(type['zip']):
+
                 if not os.path.exists(type['kern']):
+
                     if not os.path.exists(vers_pb):
+
                         command += str(wget_pb + ' && ')
 
                     command += str(type['kern_loc'] + type['kern'] + ' && ')
@@ -80,25 +86,18 @@ def main(type):
                        'qemu-img resize ' + type['qcow'] + ' +8G && ')
 
     command += str("sudo qemu-system-arm -kernel " + type['kern'] +
-             " -cpu arm1176 -m 256 -M versatilepb " +
-             " -dtb " + 'versatile-pb.dtb ' + "-no-reboot " +
-             ' -serial stdio -append "root=/dev/sda2 panic=1 rootfstype=ext4 rw" ' +
-             " -hda " + type['qcow'] +
-             " -net user -net nic ")
+                   " -cpu arm1176 -m 1024 -M versatilepb " +
+                   " -dtb " + 'versatile-pb.dtb ' + "-no-reboot " +
+                   ' -serial stdio -append "root=/dev/sda2 panic=1 rootfstype=ext4 rw" ' +
+                   " -hda " + type['qcow'] +
+                   " -net user -net nic ")
 
-#   print(str('command = ' + command))
+    #   print(str('command = ' + command))
     bash(command)
     print('waiting ... ')
     sleep(2)
     print('waiting ... ')
     sleep(2)
-
-    str("sudo qemu-system-arm -kernel " + type['kern'] +
-             " -cpu arm1176 -m 256 -M versatilepb " +
-             " -dtb " + 'versatile-pb.dtb ' + "-no-reboot " +
-             ' -serial stdio -append "root=/dev/sda2 panic=1 rootfstype=ext4 rw" ' +
-             " -hda " + type['qcow'] +
-             " -net user -net nic ")
 
 
 if __name__ == '__main__':
@@ -120,4 +119,3 @@ if __name__ == '__main__':
             raise SystemExit
 
     main(type)
-

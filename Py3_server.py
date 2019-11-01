@@ -15,7 +15,7 @@ import subprocess
 verbose = False  # use prints to console?
 
 addr = '127.0.0.1'  # server's address
-port = 8080  # must match client
+port = 8888  # must match client
 
 
 class RequestHandler(BaseHTTPRequestHandler):
