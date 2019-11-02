@@ -1,12 +1,15 @@
-
-# motion setup:
-apt-get install ffmpeg libmariadb3 libpq5 libmicrohttpd12 -y
-wget https://github.com/Motion-Project/motion/releases/download/release-4.2.2/pi_buster_motion_4.2.2-1_armhf.deb
-dpkg -i pi_buster_motion_4.2.2-1_armhf.deb
+# depends:
 apt-get install python-pip3 -y
 apt-get install python-pillow -y
 apt-get install python-pip python-dev libssl-dev libcurl4-openssl-dev libjpeg-dev libz-dev -y
+pip install requests
+pip3 install requests
+apt-get install linux-tools-generic
+modprobe usbip_host
 
+apt-get install ffmpeg libmariadb3 libpq5 libmicrohttpd12 -y
+wget https://github.com/Motion-Project/motion/releases/download/release-4.2.2/pi_buster_motion_4.2.2-1_armhf.deb
+dpkg -i pi_buster_motion_4.2.2-1_armhf.deb
 
 # motioneye setup:
 pip install motioneye
@@ -17,12 +20,6 @@ cp /usr/local/share/motioneye/extra/motioneye.systemd-unit-local /etc/systemd/sy
 systemctl daemon-reload
 systemctl enable motioneye
 systemctl start motioneye
-
-# usbip depends:
-pip3 install requests
-sudo apt-get install linux-tools-generic
-sudo modprobe usbip_host
-# nohup usbipd &  # starts daemon, this is run from the python script
 
 # move files to destinations:
 cp Py3_client.py ~

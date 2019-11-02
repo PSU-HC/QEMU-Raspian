@@ -90,7 +90,7 @@ def main(type):
                    " -dtb " + 'versatile-pb.dtb ' + "-no-reboot " +
                    ' -serial stdio -append "root=/dev/sda2 panic=1 rootfstype=ext4 rw" ' +
                    " -hda " + type['qcow'] +
-                   " -net user -net nic ")
+                   " -net user,hostfwd=tcp::8000-:9000 -net nic ")  # port forward
 
     #   print(str('command = ' + command))
     bash(command)
