@@ -6,7 +6,7 @@ Emulates a variety of Raspian releases on proper ARM hardware with QEMU.
 
 ***Prerequisites:***    
 
-QEMU and wget  (OSX homebrew0
+QEMU and wget (OSX homebrew)
 
 ```bash
 brew install qemu wget
