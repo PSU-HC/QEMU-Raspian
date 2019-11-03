@@ -1,41 +1,60 @@
-# USBoN
+# Using QEMU for Raspian ARM
 
-*Serial over Network Plugin for Octoprint*
+*tested on Mac OSX 10.14.6*
 
-***Please see [/qemu_env](https://github.com/Jesssullivan/USBoN/tree/master/qemu_env) for ARM Raspian emulation!***
+Emulates a variety of Raspian releases on proper ARM hardware with QEMU.  
 
-*remote setup:*
+***Prerequisites:***    
+
+QEMU and wget  (OSX homebrew0
+
 ```bash
-# install depends:
-pip3 install Requests
-sudo apt-get install usbip
-# nohup usbipd &  # starts daemon, this is run from the python script 
+brew install qemu wget
+```      
 
-# move files to destinations:
-cp Py3_client.py ~
-sudo cp client.service /etc/systemd/client.service
-
-# start systemd service:
-sudo systemctl daemon-reload
-sudo systemctl enable client.service
-
-# reboot for changes to take effect:
-sudo reboot
-```
-
-*server setup:*  
+Get the Python3 CLI in this repo:
 ```bash
-# install depends:
-sudo apt-get install linux-tools-generic
-sudo modprobe vhci-hcd
-python3 Py3_server.py
+wget https://raw.githubusercontent.com/Jesssullivan/USBoN/master/QEMU_Raspian.py
+```     
+
+- - -
+***Usage:***               
+
+After the first launch, it will launch from the persistent .qcow2 image.         
+
+With no arguments & in a new folder, Raspian "stretch-lite" (no desktop environment) will be:        
+    - downloaded as a zip archive with a release kernel      
+    - unarchived --> to img      
+    - converted to a Qcow2 with 8gb allocated as disk        
+    - launched from Qcow2 as administrator       
+     
+```bash
+sudo python3 QEMU_Raspian.py 
+```             
+ 
+***Optional Arguments:***       
+    
+-  ``` -h ```  prints CLI usage help         
+- ``` -rm ``` removes ALL files added in dir with QEMU_Raspian.py        
+- ``` stretch ``` uses standard graphical stretch release with GUI        
+- ```stretchlite ``` for stretchlite release [default!]          
+- ``` buster ``` for standard graphical buster release [YMMV]     
+- ```busterlite``` for busterlite release [YMMV]            
+    
+```bash
+# examples:
+sudo python3 QEMU_Raspian.py busterlite
+python3 QEMU_Raspian -h  # print help
 ```
+- - -     
+***Burn as .img:***        
 
-***Status***        
+to burn the new image back to an SD card for a hardware Pi:     
 
-Intended for remote Pi Zeros (raspian + motioneye) installed around our facility.     
-A central server manages motioneye streams, OctoPrint, job slicing, etc.    
+```bash
+qemu-img convert -f qcow2 -O raw file.qcow2 file.img
+```     
 
-Serial device (e.g. 3d printer) connected to a remote client is mounted on the server using the Debian usbip package.       
+- - -
 
-As of 10/28/19, scripts / functions have yet to be merged into the OctoPrint plugin scaffold. 
+![Alt text](imgs.png?raw=true)
