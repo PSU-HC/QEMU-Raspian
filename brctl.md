@@ -1,0 +1,2 @@
+ brctl addbr br0
+ 

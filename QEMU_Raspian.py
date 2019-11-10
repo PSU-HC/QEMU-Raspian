@@ -116,7 +116,8 @@ def main(rtype):
                    " -dtb " + 'versatile-pb.dtb ' + "-no-reboot " +
                    ' -serial stdio -append "root=/dev/sda2 panic=1 rootfsrtype=ext4 rw" ' +
                    " -hda " + rtype['qcow'] +
-                   " -net user,hostfwd=tcp::8000-:9000 -net nic ")  # port forward
+                   " -netdev tap,id=mynet0,ifname=tap0,script=no,downscript=no" +  # testing tap / tun
+                   " -net user, -net nic ")
 
     # print(str('command = ' + command))  # debug only
     bash(command)
