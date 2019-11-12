@@ -27,8 +27,26 @@ wget https://raw.githubusercontent.com/Jesssullivan/USBoN/master/QEMU_Raspian.py
 ***info - multiple guests over virtual bridge (.deb distros only):***                       
 
 - multiple guests get unique MAC addresses  
-- see /setupHostDepends.sh for required packages  
+- see /setupHostDepends.sh for required packages    
+    
+```bash
 
+# permiss shell scripts with ``` sudo chmod u+x ... ``` 
+
+sudo ./setupHostDepends.sh
+
+# switch to bridge br0:
+sudo ./UPbrctl.sh
+
+# back to normal host network:
+sudo ./DOWNbrctl.sh
+
+# add network bits for host:
+rm /etc/network/interfaces  # existing lo file
+cp interfaces /etc/network/  # replace from this repo
+cp qemu-ifup /etc/
+
+```     
 
 - - -
 ***usage - single guest:***               
