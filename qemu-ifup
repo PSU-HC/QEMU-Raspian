@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# default location, ubuntu host:
 # /etc/qemu-ifup
 
 set -x

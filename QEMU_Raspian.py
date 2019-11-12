@@ -1,16 +1,16 @@
-from subprocess import Popen
+import subprocess
 import os
 from sys import argv
 from time import sleep
 
-help_str = "\n \
-            use -rm to remove QEMU file from this dir \n \
-            use -h to see this message again \n \
-            build image with ``` qemu-img convert -f qcow2 -O raw file.qcow2 file.img ``` \n\n \
-            supply arg 'stretch' for standard stretch release   \n \
-            supply arg 'stretchlite' for stretchlite release [default]  \n \
-            supply arg 'buster' for standard buster release  \n \
-            supply arg 'busterlite' for busterlite release \n"
+help_str = str("\n " +
+               " use -rm to remove QEMU file from this dir \n " +
+               " use -h to see this message again \n " +
+               " build image with ``` qemu-img convert -f qcow2 -O raw file.qcow2 file.img ``` \n\n " +
+               " supply arg 'stretch' for standard stretch release \n " +
+               " supply arg 'stretchlite' for stretchlite release [default] \n " +
+               " supply arg 'buster' for standard buster release  \n " +
+               " supply arg 'busterlite' for busterlite release \n ")
 
 # global pb:
 vers_pb = "versatile-pb.dtb"
@@ -68,8 +68,16 @@ def rm():  # benefit of the doubt- some other file could be in here besides this
             os.remove(file)
 
 
+def new_mac():
+    output = subprocess.run(['./MAC.sh'], stdout=subprocess.PIPE)
+    return output.stdout.decode('utf-8')[1:17]
+
+
 def bash(cmd):
-    Popen(cmd, shell=True, executable='/bin/bash')
+    subprocess.Popen(cmd, shell=True, executable='/bin/bash')
+
+
+# TODO: setup apt utils script- brctl, tap / tun, etc
 
 
 def argtype():
@@ -89,7 +97,9 @@ def argtype():
 
 
 def main(rtype):
+
     command = ' '
+    my_mac = new_mac()
 
     if not os.path.exists(rtype['qcow']):
 
@@ -100,6 +110,7 @@ def main(rtype):
                 if not os.path.exists(rtype['kern']):
 
                     if not os.path.exists(vers_pb):
+
                         command += str(wget_pb + ' && ')
 
                     command += str(rtype['kern_loc'] + rtype['kern'] + ' && ')
@@ -109,15 +120,14 @@ def main(rtype):
             command += str(' unzip ' + rtype['zip'] + ' && ')
 
         command += str('qemu-img convert -f raw -O qcow2 ' + rtype['fs'] + ' ' + rtype['qcow'] + ' && ' +
-                       'qemu-img resize ' + rtype['qcow'] + ' +8G && ')
+                       'qemu-img resize ' + rtype['qcow'] + ' +16G && ')
 
     command += str("sudo qemu-system-arm -kernel " + rtype['kern'] +
                    " -cpu arm1176 -m 256 -M versatilepb " +
                    " -dtb " + 'versatile-pb.dtb ' + "-no-reboot " +
                    ' -serial stdio -append "root=/dev/sda2 panic=1 rootfsrtype=ext4 rw" ' +
                    " -hda " + rtype['qcow'] +
-                   " -netdev tap,id=mynet0,ifname=tap0,script=no,downscript=no" +  # testing tap / tun
-                   " -net user, -net nic ")
+                   " -netdev tap,id=net0 -device e1000,netdev=net0,mac=" + my_mac)
 
     # print(str('command = ' + command))  # debug only
     bash(command)
