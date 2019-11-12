@@ -1,7 +1,9 @@
-# Using QEMU for Raspian ARM
+# Using QEMU for Raspian ARM         
+     
+*single ARM guest configuration tested on Mac OSX 10.14.6 host*        
+*experimental multi-guest support for Ubuntu 18.04 host (Gnome / Budgie) over virtual network bridge*    
 
-*tested on Mac OSX 10.14.6*
-
+    
 Emulates a variety of Raspian releases on proper ARM hardware with QEMU.  
 
 ***Prerequisites:***    
@@ -9,16 +11,27 @@ Emulates a variety of Raspian releases on proper ARM hardware with QEMU.
 QEMU and wget (OSX homebrew)
 
 ```bash
-brew install qemu wget
+# OSX:
+brew install qemu wget 
+
+# Ubuntu:
+sudo apt-get install qemu-system-arm -y
 ```      
 
 Get the Python3 CLI in this repo:
 ```bash
 wget https://raw.githubusercontent.com/Jesssullivan/USBoN/master/QEMU_Raspian.py
-```     
+```  
+- - -
+
+***info - multiple guests over virtual bridge (.deb distros only):***                       
+
+- multiple guests get unique MAC addresses  
+- see /setupHostDepends.sh for required packages  
+
 
 - - -
-***Usage:***               
+***usage - single guest:***               
 
 After the first launch, it will launch from the persistent .qcow2 image.         
 
@@ -32,7 +45,7 @@ With no arguments & in a new folder, Raspian "stretch-lite" (no desktop environm
 sudo python3 QEMU_Raspian.py 
 ```             
  
-***Optional Arguments:***       
+***optional guest configuration arguments:***       
     
 -  ``` -h ```  prints CLI usage help         
 - ``` -rm ``` removes ALL files added in dir with QEMU_Raspian.py        
@@ -46,15 +59,17 @@ sudo python3 QEMU_Raspian.py
 sudo python3 QEMU_Raspian.py busterlite
 python3 QEMU_Raspian -h  # print help
 ```
+     
 - - -     
-***Burn as .img:***        
+
+```
+# YMMV: burn / backup as .img:     
 
 to burn the new image back to an SD card for a hardware Pi:     
 
-```bash
+# bash
 qemu-img convert -f qcow2 -O raw file.qcow2 file.img
-```     
-
+```  
 - - -
 
 ![Alt text](imgs.png?raw=true)
