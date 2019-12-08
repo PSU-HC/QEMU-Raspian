@@ -1,4 +1,9 @@
 # Using QEMU for Raspian ARM         
+
+_ _ _
+***README yet to be updated with Makerspace-specific formatting*** 
+_ _ _
+
      
 *single ARM guest configuration tested on Mac OSX 10.14.6 host*        
 *experimental multi-guest support for Ubuntu 18.04 host (Gnome / Budgie) over virtual network bridge*    
